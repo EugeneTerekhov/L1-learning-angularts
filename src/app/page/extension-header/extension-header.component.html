@@ -1,0 +1,41 @@
+<div class="second-header-grid">
+  <div class="filter-chips">
+    <mat-chip-list [multiple]="true" [selectable]="true">
+      <!-- [selected]="true" для того чтоб цвет менялся-->
+      <ng-container *ngFor="let filter of prefilters">
+        <mat-chip class="mat-chip" [color]="filter.selected ? 'accent': 'secondary'" (click)="toggleFilter(filter)"
+          [selected]="true" [selectable]="true">{{filter.name}}</mat-chip>
+      </ng-container>
+    </mat-chip-list>
+  </div>
+  <div class="menu-second-header">
+    <button mat-icon-button [matMenuTriggerFor]="menu" color="primary" aria-label="Table actions">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="openDialog(actions().ADD)">
+        <mat-icon color="primary">vpn_key</mat-icon>
+        <span>Добавление</span>
+      </button>
+      <button
+        mat-menu-item
+        disabled>
+        <mat-icon color="primary">edit</mat-icon>
+        <span>Редактирование</span>
+      </button>
+      <button
+        (click)="update()"
+        mat-menu-item>
+        <mat-icon color="primary">update</mat-icon>
+        <span>Обновление</span>
+      </button>
+      <button
+        mat-menu-item
+        (click)="openDialog(actions().DELETE)"
+        [disabled]="!marked">
+        <mat-icon color="primary">delete</mat-icon>
+        <span>Удаление</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>

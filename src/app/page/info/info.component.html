@@ -1,0 +1,51 @@
+<mat-divider></mat-divider>
+<app-extension-header (action)="action($event)" (changeFilters)="refresh($event)"
+  [marked]="selection.selected.length > 0"></app-extension-header>
+<mat-divider></mat-divider>
+<table mat-table matSort matSortActive="id | systemCode | branchMnemonic | createDate" matSortDisableClear
+  matSortDirection="asc" [dataSource]="dataSource" multiTemplateDataRows>
+  <!--class="mat-elevation-z8"-->
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()" color="primary">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+        [checked]="selection.isSelected(row)" color="primary">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="{{column}}" *ngFor="let column of columns">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{column}} </th>
+    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+  </ng-container>
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="headerColumns.length">
+      <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <mat-divider></mat-divider>
+        <div>
+          <mat-selection-list [multiple]="false">
+            <ng-container *ngFor="let attribute of attributes">
+              <mat-list-option (dblclick)="clipboard.copy(element[attribute])">
+                <div matLine class="grid-row">
+                  <div>{{attribute}}</div>
+                  <div>{{element[attribute]}}</div>
+                </div>
+              </mat-list-option>
+            </ng-container>
+          </mat-selection-list>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="headerColumns"></tr>
+  <tr mat-row *matRowDef="let element; columns: headerColumns;" class="element-row"
+    [class.example-expanded-row]="expandedElement === element"
+    (click)="expandedElement = expandedElement === element ? null : element" (dblclick)="selection.toggle(element)">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+</table>

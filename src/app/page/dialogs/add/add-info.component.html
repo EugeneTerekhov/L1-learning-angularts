@@ -1,0 +1,41 @@
+<mat-dialog-content class="mat-typography">
+  <h3>Добавление ключа ИС</h3>
+  <div class="fields-columns">
+    <mat-form-field>
+      <mat-label>name</mat-label>
+      <input matInput [(ngModel)]="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>coupon</mat-label>
+      <input matInput [(ngModel)]="coupon">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>company</mat-label>
+      <input matInput [(ngModel)]="company">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>fio</mat-label>
+      <input matInput [(ngModel)]="fio">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>address</mat-label>
+      <input matInput [(ngModel)]="address">
+    </mat-form-field>
+    <!-- <mat-form-field>
+      <mat-label>expireDate</mat-label>
+      <input placeholder="YYYY-MM-DDTHH:mm:ss.sssZ" matInput [(ngModel)]="expireDate">
+    </mat-form-field> -->
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    [mat-dialog-close]="null"
+    mat-button>Отмена
+  </button>
+  <button
+    [disabled]="isNotBlank(name, coupon, company, fio, address)"
+    [mat-dialog-close]="item()"
+    cdkFocusInitial
+    mat-button>Применить
+  </button>
+</mat-dialog-actions>

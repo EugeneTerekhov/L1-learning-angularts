@@ -1,0 +1,44 @@
+.second-header-grid {
+  background-color: white;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 40px;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  min-width: 650px;
+}
+
+.filter-chips {
+  padding-left: 10px;
+  align-items: center;
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.menu-second-header {
+}
+
+/**
+  color - цвет шрифта
+  background-color - цвет chip
+ */
+.mat-chip.mat-standard-chip {
+  background-color: #fafafa;
+  color: rgba(0, 0, 0, 0.54);
+  border: 1px solid #cdcdcd;
+}
+
+/**
+  color - цвет шрифта
+  background-color - цвет chip
+ */
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-accent {
+  background-color: rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.54);
+}
+
+/* цвет фокуса chip, вроде */
+.mat-chip.mat-standard-chip::after {
+  background: rgba(250, 250, 250, 0);
+}
