@@ -106,6 +106,7 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       case Action.UPDATE: {
         this.load(this.source);
+        this.selection.clear();
         break;
       }
     }
@@ -150,12 +151,6 @@ export class InfoComponent implements OnInit, OnDestroy, AfterViewInit {
         if (selectedFilters.length > 0)
           return selectedFilters
             .map((filter) => {
-              console.log(item);
-              console.log(filter.check(item));
-              console.log(filter);
-              console.log(item["expireDate"]);
-              console.log(Date.parse(item["expireDate"]));
-              console.log(Date.now());
               return filter.check(item);
             })
             .reduce((previous, current) => previous && current);
